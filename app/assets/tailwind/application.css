@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Impact Font */
+@font-face {
+  font-family: 'Impact';
+  src: local('Impact');
+}
+
+body {
+  font-family: 'Impact', Arial, sans-serif;
+}
