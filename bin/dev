@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env sh
 
 if ! gem list foreman -i --silent; then
@@ -14,3 +15,7 @@ export RUBY_DEBUG_OPEN="true"
 export RUBY_DEBUG_LAZY="true"
 
 exec foreman start -f Procfile.dev "$@"
+=======
+#!/usr/bin/env ruby
+exec "./bin/rails", "server", *ARGV
+>>>>>>> b616720 (l)
