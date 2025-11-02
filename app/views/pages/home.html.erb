@@ -1,41 +1,50 @@
 <div class="main-container">
   <div class="container">
-    <!--Navigation Bar-->
+    <!-- Navigation Bar -->
     <section id="home-taskbar" class="w-full flex flex-col min-h-screen p-8">
       <div class="w-full flex space-x-4 mb-8">
-        <a href="" class="text-4xl hover:text-gray-500">GooderReads</a>
-        <a href="" class="font-sans text-3xl hover:text-gray-500">Disover</a>
-        <a href="" class="font-sans text-3xl hover:text-gray-500">My Read</a>
-        <a href="" class="font-sans text-3xl hover:text-gray-500">Book Club</a>
+        <a href="#" class="text-4xl hover:text-gray-500">GooderReads</a>
+        <a href="#" class="font-sans text-3xl hover:text-gray-500">Discover</a>
+        <a href="#" class="font-sans text-3xl hover:text-gray-500">My Read</a>
+        <a href="#" class="font-sans text-3xl hover:text-gray-500">Book Club</a>
       </div>
-      <!--Cards For Dev Selected Book-->
+
+      <!-- Dev Selected Book -->
+      <% dev_book = @books.first %> <!-- pick first book as dev-selected for example -->
       <section id="dev-book" class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-lg shadow">
         <div class="flex flex-col md:flex-row gap-6">
-          <img src="cover" alt="title" class="w-48 h-72 object-cover rounded shadow"> <!--Add Cover Image and Title-->
+          <%= image_tag dev_book.cover_url.presence || "placeholder.jpg", 
+                        alt: dev_book.title, 
+                        class: "w-48 h-72 object-cover rounded shadow" %>
           <div class="col-xl-3 col-md-6 col-12">
-            <h1 class="text-2xl font-sans">Dev Selected Book</h1>
-            <p class="text-gray-600 italic mb-2"> by </p>
- <!--Add author variable in book-->
-            <a href="book path" class="inline-block mt-4 text-indigo-600 hover:underline"></a> <!--Add Bookpath and implement to image-->
+            <h1 class="text-2xl font-sans"><%= dev_book.title %></h1>
+            <p class="text-gray-600 italic mb-2">by <%= dev_book.author %></p>
+            <a href="<%= book_path(dev_book) %>" class="inline-block mt-4 text-indigo-600 hover:underline">
+              View Book
+            </a>
           </div>
         </div>
       </section>
 
-      <!--Recommended Reads Section-->
+      <!-- Recommended Reads By Genre -->
       <section id="recommended" class="p-8 bg-gray-50">
         <h2 class="text-3xl mb-8">Recommended Reads By Genre</h2>
-        <> <!--Implement Looping through Genres-->
-          <h3 class="text-2xl font-sans mb-4"><></h3> <!--Genre name based on class-->
+
+        <% @books.group_by(&:genre).each do |genre, books_in_genre| %>
+          <h3 class="text-2xl font-sans mb-4"><%= genre %></h3>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-            <> <!--Implement Looping through Genres same as before for book-->
-              <a href="bookpath" class="block bg-white p-4 rounded-lg shadow hover:shadow lg transition">
-                <img src="book cover" alt="book title" class="w-full h-60 object cover rounded"> <!--Add book cover logic from before-->
-                <h4 class="mt-2 text-lg"><!--Add book title--></h4>
-                <p class="text-gray-500 text-sm"><!--Add book Author--> </p>
+            <% books_in_genre.each do |book| %>
+              <a href="<%= book_path(book) %>" class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+                <%= image_tag book.cover_url.presence || "placeholder.jpg", 
+                              alt: book.title, 
+                              class: "w-full h-60 object-cover rounded" %>
+                <h4 class="mt-2 text-lg"><%= book.title %></h4>
+                <p class="text-gray-500 text-sm"><%= book.author %></p>
               </a>
-            <>
+            <% end %>
           </div>
-        <>
+        <% end %>
       </section>
+    </section>
   </div>
 </div>
