@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# GooderReads
 
-Things you may want to cover:
+A book review web application built with Ruby on Rails.
 
-* Ruby version
+## Features Currently
 
-* System dependencies
+Core feature of database is set up with one book added. More books will be added over time as well as
+an option to add books.
 
-* Configuration
+## Setup
 
-* Database creation
+1. Clone the repo
+2. Run `bundle install`
+3. Run `rails db:migrate`
+4. Run `rails server` and visit `http://localhost:3000`
 
-* Database initialization
+- If running `rails server` doesn't work, try `bin/dev` or `bin/rails server`
+- some issues persist with running the app on windows. Make sure you're running WSL extension
+  if using VSCode to run app.
 
-* How to run the test suite
+## Authors
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Brayden Robertson
+Chloe Dierdorff
+Jaxon Svec
+Reid Crooks
+Calvin Thompson III
