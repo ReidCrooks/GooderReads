@@ -8,14 +8,15 @@
         <a href="#" class="font-sans text-3xl hover:text-gray-500">My Read</a>
         <a href="#" class="font-sans text-3xl hover:text-gray-500">Book Club</a>
       </div>
-
       <!-- Dev Selected Book -->
       <% dev_book = @books.first %> <!-- pick first book as dev-selected for example -->
       <section id="dev-book" class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-lg shadow">
         <div class="flex flex-col md:flex-row gap-6">
-          <%= image_tag dev_book.cover_url.presence || "placeholder.jpg", 
-                        alt: dev_book.title, 
-                        class: "w-48 h-72 object-cover rounded shadow" %>
+          <% if dev_book.present? %>
+            <%= image_tag dev_book.cover_url.presence || "placeholder.jpg", alt: dev_book.title %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "No book available" %>
+          <% end %>
           <div class="col-xl-3 col-md-6 col-12">
             <h1 class="text-2xl font-sans"><%= dev_book.title %></h1>
             <p class="text-gray-600 italic mb-2">by <%= dev_book.author %></p>
@@ -25,11 +26,9 @@
           </div>
         </div>
       </section>
-
       <!-- Recommended Reads By Genre -->
       <section id="recommended" class="p-8 bg-gray-50">
         <h2 class="text-3xl mb-8">Recommended Reads By Genre</h2>
-
         <% @books.group_by(&:genre).each do |genre, books_in_genre| %>
           <h3 class="text-2xl font-sans mb-4"><%= genre %></h3>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
