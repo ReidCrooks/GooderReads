@@ -1,0 +1,47 @@
+ <!-- LOGIC FOR ADDING A NEW BOOK -->
+<section class="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow">
+  <h1 class="text-3xl font-bold mb-6">Add a New Book</h1>
+  <%= form_with model: @book, local: true, multipart: true do |f| %>
+    <% if @book.errors.any? %>
+      <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+        <p><strong><%= pluralize(@book.errors.count, "error") %> prevented this book from being saved:</strong></p>
+        <ul class="list-disc ml-5">
+          <% @book.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-4">
+      <%= f.label :title, class: "block font-semibold mb-1" %>
+      <%= f.text_field :title, class: "w-full border rounded px-3 py-2" %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :author, class: "block font-semibold mb-1" %>
+      <%= f.text_field :author, class: "w-full border rounded px-3 py-2" %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :rating, class: "block font-semibold mb-1" %>
+      <%= f.number_field :rating, in: 0..5, class: "w-full border rounded px-3 py-2" %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :genre, class: "block font-semibold mb-1" %>
+      <%= f.text_field :genre, class: "w-full border rounded px-3 py-2" %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :review, class: "block font-semibold mb-1" %>
+      <%= f.text_area :review, rows: 4, class: "w-full border rounded px-3 py-2" %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :description, class: "block font-semibold mb-1" %>
+      <%= f.text_area :description, rows: 5, class: "w-full border rounded px-3 py-2" %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :cover_image, "Upload Cover Image", class: "block font-semibold mb-1" %>
+      <%= f.file_field :cover_image, class: "w-full" %>
+    </div>
+    <div>
+      <%= f.submit "Create Book", class: "px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700" %>
+    </div>
+  <% end %>
+</section>

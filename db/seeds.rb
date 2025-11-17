@@ -2,7 +2,7 @@
 
 if Rails.env.development? || Rails.env.test?
   if Book.count.zero?
-    puts "Seeding default books..."
+    puts "Seeding default books..." # Adding default books to empty database
 
     books = [
       {

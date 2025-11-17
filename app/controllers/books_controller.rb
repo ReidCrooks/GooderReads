@@ -12,30 +12,25 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.find_or_initialize_by(title: book_params[:title], author: book_params[:author])
-    if @book.update(book_params)
-      redirect_to @book, notice: "Book successfully added or updated!"
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to @book, notice: "Book was successfully created."
     else
-      render :new
-    end
-  end
-
-  def edit
-    @book = Book.find(params[:id])
-  end
-
-  def update
-    @book = Book.find(params[:id])
-    if @book.update(book_params)
-      redirect_to @book, notice: "Book successfully updated!"
-    else
-      render :edit
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:title, :author, :rating, :review, :genre)
+    params.require(:book).permit(
+      :title,
+      :author,
+      :rating,
+      :review,
+      :genre,
+      :cover_image,
+      :description
+    )
   end
 end

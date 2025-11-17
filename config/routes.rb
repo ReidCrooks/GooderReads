@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   
 
   root "pages#home"
+  get "home", to: "pages#home" # redirects /home to root path
   resources :books
 end
