@@ -17,6 +17,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_02_040519) do
     t.integer "rating"
     t.text "review"
     t.string "genre"
+    t.string "cover_image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
