@@ -29,9 +29,15 @@
                class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1"
                style="font-family: 'Playfair', serif; color: #403c2b;">
         <div class="flex flex-col md:flex-row gap-6">
-          <%= image_tag @dev_book.cover_url.presence || "placeholder.jpg",
-                        alt: @dev_book.title,
-                        class: "w-48 h-72 object-cover rounded shadow" %>
+          <% if @dev_book&.cover_image&.attached? %>
+            <%= image_tag @dev_book.cover_image,
+                alt: @dev_book.title,
+                class: "w-48 h-72 object-cover rounded shadow" %>
+          <% else %>
+            <%= image_tag "placeholder.jpg",
+                alt: "No cover available",
+                class: "w-48 h-72 object-cover rounded shadow" %>
+          <% end %>
           <div class="flex flex-col justify-center">
             <h2 class="text-3xl font-semibold mb-2"><%= @dev_book.title %></h2>
             <p class="italic mb-4 text-[#78793f]">by <%= @dev_book.author %></p>
@@ -76,9 +82,15 @@
               <% books_in_genre.each do |book| %>
                 <a href="<%= book_path(book) %>" 
                  class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
-                  <%= image_tag book.cover_file.present? ? asset_path(book.cover_file) : "placeholder.jpg",
-                  alt: book.title,
-                  class: "w-full h-60 object-cover rounded" %>
+                  <% if book.cover_image.attached? %>
+                    <%= image_tag book.cover_image,
+                alt: book.title,
+                class: "w-full h-60 object-cover rounded" %>
+                  <% else %>
+                    <%= image_tag "placeholder.jpg",
+                alt: "No cover available",
+                class: "w-full h-60 object-cover rounded" %>
+                  <% end %>
                   <h4 class="mt-2 text-lg font-semibold text-[#403c2b]"><%= book.title %></h4>
                   <p class="text-sm text-gray-500 italic"><%= book.author %></p>
                 </a>
