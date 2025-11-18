@@ -1,37 +1,63 @@
 # db/seeds.rb
 
 if Rails.env.development? || Rails.env.test?
+
+
+  puts "Seeding genres..."
+
+  genre_names = [
+    "Fiction",
+    "Dystopian",
+    "Romance",
+    "Adventure",
+    "Fantasy",
+    "Horror",
+    "Science Fiction",
+    "Historical Fiction",
+    "Philosophical Fiction",
+    "Non-Fiction",
+    "Biography",
+    "Self-Help"
+  ]
+
+  genres = genre_names.map do |name|
+    Genre.find_or_create_by!(name: name)
+  end
+
+  puts "Genres seeded!"
+
+
   puts "Seeding default books..."
 
   books = [
     {
       title: "To Kill a Mockingbird",
       author: "Harper Lee",
-      genre: "Fiction",
+      genre_names: [ "Fiction" ],
       filename: "to_kill_a_mockingbird.jpg"
     },
     {
       title: "1984",
       author: "George Orwell",
-      genre: "Dystopian",
+      genre_names: [ "Dystopian", "Science Fiction", "Fiction" ],
       filename: "1984.jpg"
     },
     {
       title: "Pride and Prejudice",
       author: "Jane Austen",
-      genre: "Romance",
+      genre_names:[ "Romance", "Fiction" ],
       filename: "pride_and_prejudice.jpg"
     },
     {
       title: "The Great Gatsby",
       author: "F. Scott Fitzgerald",
-      genre: "Fiction",
+      genre_names: [ "Fiction" ],
       filename: "the_great_gatsby.jpg"
     },
     {
       title: "Moby-Dick",
       author: "Herman Melville",
-      genre: "Adventure",
+      genre_names: [ "Adventure", "Fiction" ],
       filename: "moby_dick.jpg"
     }
   ]
@@ -45,6 +71,8 @@ if Rails.env.development? || Rails.env.test?
       b.rating = rand(1..5)
       b.review = "There is not a review for this book, feel free to add one!"
     end
+
+    book.genres = Genre.where(name: attrs[:genre_names]) #attach genres 
 
     # Attach cover image IF missing
     unless book.cover_image.attached?

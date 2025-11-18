@@ -28,9 +28,9 @@ class BooksController < ApplicationController
       :author,
       :rating,
       :review,
-      :genre,
       :cover_image,
-      :description
+      :description,
+      genre_ids: [] #allow multiple genre id's
     )
   end
 end

@@ -25,8 +25,17 @@
       <%= f.number_field :rating, in: 0..5, class: "w-full border rounded px-3 py-2" %>
     </div>
     <div class="mb-4">
-      <%= f.label :genre, class: "block font-semibold mb-1" %>
-      <%= f.text_field :genre, class: "w-full border rounded px-3 py-2" %>
+      <%= f.label :genre_ids, "Genres", class: "block font-semibold mb-1" %>
+      <%= f.collection_select :genre_ids,
+                          Genre.order(:name),
+                          :id,
+                          :name,
+                          { include_hidden: false },
+                          { multiple: true,
+                            class: "w-full border rounded px-3 py-2 h-40" } %>
+      <p class="text-xs text-gray-500 mt-1">
+        Hold Ctrl (Windows/Linux) or Command (Mac) to select multiple genres.
+      </p>
     </div>
     <div class="mb-4">
       <%= f.label :review, class: "block font-semibold mb-1" %>
