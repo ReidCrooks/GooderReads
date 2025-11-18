@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @dev_book = Book.first
+    @dev_book = Book.joins(:cover_image_attachment).order(created_at: :desc).first || Book.first
 
     all_books = Book.all
 

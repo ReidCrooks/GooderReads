@@ -7,7 +7,8 @@
     <% @books.each do |book| %>
       <li class="flex items-center gap-4 mb-4">
         <% if book.cover_image.attached? %>
-          <%= image_tag(book.cover_image, alt: book.title, width: 80) %>
+          <%= image_tag book.cover_image,
+              class: "w-20 h-28 object-cover rounded" %>
         <% else %>
           <%= image_tag("placeholder.jpg", alt: "Placeholder image", width: 80) %> <!-- Placeholder image if no cover is attached -->
         <% end %>

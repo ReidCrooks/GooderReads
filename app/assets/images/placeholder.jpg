@@ -1,3 +1,0 @@
-<%= image_tag(dev_book.cover_url.presence || "placeholder.jpg", 
-              alt: dev_book.title, 
-              class: "w-48 h-72 object-cover rounded shadow") %>

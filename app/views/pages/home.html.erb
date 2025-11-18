@@ -57,38 +57,37 @@
     <!-- Books Section -->
     <div id="books-section">
       <!-- Books Header -->
-    <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-lg shadow">
-      <div class="flex justify-between items-center">
-        <h2 class="text-2xl font-bold">Books</h2>
-        <%= link_to "Add Book",
+      <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-lg shadow">
+        <div class="flex justify-between items-center">
+          <%= link_to "Add Book",
                 new_book_path,
                 class: "px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700" %>
-      </div>
-    </section>
-    <!-- Recommended Reads By Genre -->
-    <section id="recommended" class="p-8 bg-gray-50">
-      <h2 class="text-4xl text-center text-[#403c2b] mb-10" style="font-family: 'Playfair Display', serif;">
-        Recommended Reads By Genre
-      </h2>
-      <% if @recommended_books.present? %>
-        <% @recommended_books.each do |genre, books_in_genre| %>
-          <h3 class="text-2xl font-semibold mb-4 text-[#403c2b]"><%= genre %></h3>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            <% books_in_genre.each do |book| %>
-              <a href="<%= book_path(book) %>" 
+        </div>
+      </section>
+      <!-- Recommended Reads By Genre -->
+      <section id="recommended" class="p-8 bg-gray-50">
+        <h2 class="text-4xl text-center text-[#403c2b] mb-10" style="font-family: 'Playfair Display', serif;">
+          Recommended Reads By Genre
+        </h2>
+        <% if @recommended_books.present? %>
+          <% @recommended_books.each do |genre, books_in_genre| %>
+            <h3 class="text-2xl font-semibold mb-4 text-[#403c2b]"><%= genre %></h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+              <% books_in_genre.each do |book| %>
+                <a href="<%= book_path(book) %>" 
                  class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
-                <%= image_tag book.cover_file.present? ? asset_path(book.cover_file) : "placeholder.jpg",
+                  <%= image_tag book.cover_file.present? ? asset_path(book.cover_file) : "placeholder.jpg",
                   alt: book.title,
                   class: "w-full h-60 object-cover rounded" %>
-                <h4 class="mt-2 text-lg font-semibold text-[#403c2b]"><%= book.title %></h4>
-                <p class="text-sm text-gray-500 italic"><%= book.author %></p>
-              </a>
-            <% end %>
-          </div>
+                  <h4 class="mt-2 text-lg font-semibold text-[#403c2b]"><%= book.title %></h4>
+                  <p class="text-sm text-gray-500 italic"><%= book.author %></p>
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-center text-gray-500 mt-8">No recommended books available yet.</p>
         <% end %>
-      <% else %>
-        <p class="text-center text-gray-500 mt-8">No recommended books available yet.</p>
-      <% end %>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
