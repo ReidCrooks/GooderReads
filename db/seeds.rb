@@ -85,7 +85,7 @@ if Rails.env.development? || Rails.env.test?
         )
         puts "Attached #{attrs[:filename]} to #{book.title}"
       else
-        puts "⚠️ Missing file: #{image_path}"
+        puts "Missing file: #{image_path}"
       end
     end
   end
