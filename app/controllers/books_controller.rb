@@ -30,7 +30,7 @@ class BooksController < ApplicationController
       :review,
       :cover_image,
       :description,
-      genre_ids: [] #allow multiple genre id's
+      genre_ids: [] # allow multiple genre id's
     )
   end
 end
