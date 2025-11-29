@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GooderReads - Login</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <style>
+      /* Global page styling */
+      body {
+        font-family: 'Playfair', serif;
+        background-color: #fffef3;
+        margin: 0;
+        padding: 0;
+        color: #403c2b;
+      }
+
+      a {
+        color: #403c2b;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #484848ff;
+      }
+
+      /* Container for form */
+      .devise-container {
+        max-width: 450px;
+        margin: 80px auto;
+        padding: 40px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        margin-top: 16px;
+        font-weight: 600;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 6px;
+        border: 1px solid #c2b38bff;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+
+      input[type="submit"] {
+        margin-top: 24px;
+        width: 100%;
+        padding: 12px;
+        background-color: #403c2b;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #78793f;
+      }
+
+      .footer-links {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 0.9rem;
+      }
+
+      .footer-links a {
+        margin: 0 8px;
+      }
+
+      .alert {
+        background-color: #ffe5b4;
+        color: #403c2b;
+        padding: 10px 14px;
+        border-radius: 6px;
+        margin-bottom: 16px;
+        border: 1px solid #c2b38b;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="devise-container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

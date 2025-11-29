@@ -1,0 +1,18 @@
+<!-- app/views/users/my_reads.html.erb -->
+<div class="my-reads-container">
+  <h1>Your Books</h1>
+  
+  <div class="books-list">
+    <% @books.each do |book| %>
+      <div class="book-item">
+        <h3><%= book.title %></h3>
+        <p><%= book.author %></p>
+        <%= link_to "View Book", book_path(book) %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @books.empty? %>
+    <p>You have not read any books yet. Add books to your collection!</p>
+  <% end %>
+</div>

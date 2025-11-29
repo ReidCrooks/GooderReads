@@ -1,23 +1,23 @@
-<div class="main-container min-h-screen w-full" style="font-family: 'Playfair', serif;">
+<div class="main-container min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
   <div class="container max-w-6xl mx-auto px-8">
     <!-- Navigation Bar -->
-    <section id="home-taskbar" class="w-full">
-      <div class="max-w-6xl mx-auto flex justify-between items-center py-6">
+    <section id="home-taskbar" class="w-full bg-[#fff8e7] shadow-md rounded-b-lg">
+      <div class="max-w-6xl mx-auto flex justify-between items-center py-6 px-4">
         <!-- Left links -->
-        <nav class="flex gap-6 text-lg tracking-[0.25em] uppercase text-[#78793f]">
-          <a href="#" class="hover:text-[#403c2b]">Discover</a>
-          <a href="#" class="hover:text-[#403c2b]">Profile</a>
+        <nav class="flex gap-6 text-lg tracking-[0.25em] uppercase font-semibold">
+          <a href="#" class="text-white navbar-link">Discover</a>
+          <%= link_to "Profile", profile_path, class: "text-white navbar-link" %> <!-- Profile link -->
         </nav>
         <!-- Centered GooderReads -->
         <a href="/" 
            style="font-family: 'Playfair Display', serif;" 
-           class="text-4xl text-[#403c2b] text-center hover:text-[#78793f] transition-colors">
+           class="text-4xl text-white text-center font-bold navbar-link">
           GooderReads
         </a>
         <!-- Right links -->
-        <nav class="flex gap-6 text-lg tracking-[0.25em] uppercase text-[#78793f]">
-          <a href="#" class="hover:text-[#403c2b]">My Reads</a>
-          <a href="#" class="hover:text-[#403c2b]">Book Club</a>
+        <nav class="flex gap-6 text-lg tracking-[0.25em] uppercase font-semibold">
+          <%= link_to "My Reads", my_reads_path, class: "text-white navbar-link" %> <!-- My Reads link -->
+          <a href="#" class="text-white navbar-link">Book Club</a>
         </nav>
       </div>
       <!-- Divider -->
@@ -54,7 +54,8 @@
         </div>
       </section>
     <% else %>
-      <section id="dev-book-placeholder" class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow text-center text-[#403c2b]">
+      <section id="dev-book-placeholder" 
+               class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 text-center text-[#403c2b]">
         <%= image_tag "placeholder.jpg", alt: "No book found", class: "w-48 h-72 object-cover rounded shadow mx-auto" %>
         <h2 class="text-xl font-semibold mt-4">No Featured Book Available</h2>
         <p class="text-gray-500">Add a book to get started!</p>
@@ -63,7 +64,7 @@
     <!-- Books Section -->
     <div id="books-section">
       <!-- Books Header -->
-      <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-lg shadow">
+      <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
         <div class="flex justify-between items-center">
           <%= link_to "Add Book",
                 new_book_path,
@@ -71,7 +72,7 @@
         </div>
       </section>
       <!-- Recommended Reads By Genre -->
-      <section id="recommended" class="p-8 bg-gray-50">
+      <section id="recommended" class="p-8 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
         <h2 class="text-4xl text-center text-[#403c2b] mb-10" style="font-family: 'Playfair Display', serif;">
           Recommended Reads By Genre
         </h2>
@@ -83,7 +84,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
               <% books_in_genre.each do |book| %>
                 <a href="<%= book_path(book) %>"
-         class="block bg-white p-4 rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+                   class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
                   <% if book.cover_image.attached? %>
                     <%= image_tag book.cover_image,
                         alt: book.title,
@@ -105,3 +106,4 @@
       </section>
     </div>
   </div>
+</div>
