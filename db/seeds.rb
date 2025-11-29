@@ -18,6 +18,7 @@ if Rails.env.development? || Rails.env.test?
     "Non-Fiction",
     "Biography",
     "Self-Help"
+    "Coming-of-age"
   ]
 
   genres = genre_names.map do |name|
@@ -60,6 +61,116 @@ if Rails.env.development? || Rails.env.test?
       genre_names: [ "Adventure", "Fiction" ],
       filename: "moby_dick.jpg"
     }
+    {
+      title: "The Hobbit"
+      author: "J.R.R Tolkien"
+      genre_names: ["Fantasy", "Adventure"]
+      filename: "The_Hobbit.jpg"
+    }
+    {
+      title: "Little Women"
+      author: "Louisa May Alcott"
+      genre_names: ["Classic", "Coming-of-age"]
+      filename: "Little_Women.jpg"
+    }
+    {
+      title: "Jane Eyre"
+      author: "Charlotte Bronte"
+      genre_names: ["Classic", "Gothic Romance"]
+      filename: "Jane_Eyre.jpg"
+    }
+    {
+      title: "Wuthering Heights"
+      author: "Emily Bronte"
+      genre_names: ["Classic", "Gothic Fiction"]
+      filename: "Wuthering_Heights.jpg"
+    }
+     {
+      title: "The Catcher in the Rye"
+      author: "J.D Salinger"
+      genre_names: ["Classic", "Coming-of-age"]
+      filename: "The_Catcher_in_the_Rye.jpg"
+    }
+     {
+      title: "The Adventures of Huckleberry Finn"
+      author: "Mark Twain"
+      genre_names: ["Classic", "Adventure"]
+      filename: "The_Adventures_of_Hucklebery_Finn.jpg"
+    }
+     {
+      title: "The Adventures of Tom Sawyer"
+      author: "Mark Twain"
+      genre_names: ["Classic", "Adventure"]
+      filename: "The_Adventures_of_Tom_Sawyer.jpg"
+    }
+     {
+      title: "The Lord of The Rings"
+      author: "J.R.R Tolkien"
+      genre_names: ["Fantasy", "Epic"]
+      filename: "LOTR.jpg"
+    }
+     {
+      title: "Animal Farm"
+      author: "George Orwell"
+      genre_names: ["Satire", "Dystopian"]
+      filename: "Animal_farm.jpg"
+    }
+     {
+      title: "Brave New World"
+      author: "Aldous Huxley"
+      genre_names: ["Dystopian", "Science Fiction"]
+      filename: "Brave_New_World.jpg"
+    }
+     {
+      title: "Fahrenheit 451"
+      author: "Ray Bradbury"
+      genre_names: ["Dystopian", "Science Fiction"]
+      filename: "451,jpg"
+    }
+     {
+      title: "Catch 22"
+      author: "Joseph Heller"
+      genre_names: ["Satire", "War Fiction"]
+      filename: "Catch_22.jpg"
+    }
+     {
+      title: "Crime and Punishment"
+      author: "Fyodor Dostoevsky"
+      genre_names: ["Classic", "Psychological Fictoin"]
+      filename: "Crime_and_Punishment.jpg"
+    }
+     {
+      title: "The Brothers Karamzov"
+      author: "Fyodor Dostoevsky"
+      genre_names: ["Classic", "Philosophical Fiction"]
+      filename: "The_Brothers_Karamzov"
+    }
+     {
+      title: "War and Peace"
+      author: "Leo Tolstoy"
+      genre_names: ["Classic", "Historical Fiction"]
+      filename: "War_and_Peace.jpg"
+    }
+     {
+      title: "Anna Karenina"
+      author: "Leo Tolstoy"
+      genre_names: ["Classic", "Romance"]
+      filename: "Anna_Karenina.jpg"
+    }
+     {
+      title: "The Grapes of Wrath"
+      author: "John Steinbeck"
+      genre_names: ["Classic", "Historical Fiction"]
+      filename: "TGW.jpg"
+    }
+     {
+      title: ""
+      author: ""
+      genre_names: [""]
+      filename: ""
+    }
+   
+  
   ]
 
   books.each do |attrs|

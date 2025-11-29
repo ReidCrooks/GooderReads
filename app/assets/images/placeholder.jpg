@@ -1,0 +1,3 @@
+<%= image_tag "placeholder.jpg",
+    alt: "No cover available",
+    class: "w-48 h-72 object-cover rounded shadow" %>
