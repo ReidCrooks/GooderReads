@@ -16,4 +16,15 @@ Rails.application.routes.draw do
   root "pages#home"
   get "home", to: "pages#home" # redirects /home to root path
   resources :books
+
+  #Defines user profile route
+  get 'profile', to: 'users#show', as: 'profile'
+
+  #Defines user read books route
+  get 'my_reads', to: 'users#my_reads', as: 'my_reads'
+
+  #Devise routes for users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 end

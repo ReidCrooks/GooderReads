@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user! # Ensure user is authenticated to view their books
+
   def index
     @books = Book.all
   end

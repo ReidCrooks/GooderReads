@@ -8,3 +8,13 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ /*CSS For Homepage Navigation Bar*/
+.navbar-link {
+  text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+}
+
+.navbar-link:hover {
+  color: #ffffff; /* Keep white on hover */
+  text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+}

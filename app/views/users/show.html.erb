@@ -1,0 +1,22 @@
+<div class="main-container min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
+  <div class="container max-w-6xl mx-auto px-8">
+    <!-- Profile Card -->
+    <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow-2xl hover:shadow-2xl transition-all transform hover:-translate-y-1">
+      <h1 class="text-3xl font-semibold text-[#403c2b] mb-6 text-center">
+        Your Profile
+      </h1>
+      <div class="profile-details mb-8">
+        <div class="mb-4">
+          <p class="text-lg text-[#403c2b]"><strong>Name:</strong> <%= @user.name %></p>
+        </div>
+        <div class="mb-4">
+          <p class="text-lg text-[#403c2b]"><strong>Email:</strong> <%= @user.email %></p>
+        </div>
+        <!-- Add any other user details here if needed -->
+      </div>
+      <div class="text-center">
+        <%= link_to "Edit Profile", edit_user_registration_path, class: "bg-[#403c2b] text-white py-2 px-6 rounded-lg text-lg hover:bg-[#78793f] transition-colors" %>
+      </div>
+    </section>
+  </div>
+</div>
