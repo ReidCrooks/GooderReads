@@ -7,4 +7,11 @@ class Book < ApplicationRecord
     has_many :book_genres, dependent: :destroy
     has_many :genres, through: :book_genres
     belongs_to :user
+
+    has_many :ratings, dependent: :destroy
+
+    def recalculate_average_rating!
+        new_avg = ratings.average(:value) || 0.0 # calculate average or default to 0.0
+        update!(average_rating: new_avg)
+    end
 end

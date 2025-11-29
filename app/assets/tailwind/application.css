@@ -2,10 +2,43 @@
 
 /* Impact Font */
 @font-face {
-  font-family: 'Impact';
-  src: local('Impact');
+  font-family: "Impact";
+  src: local("Impact");
 }
 
 body {
-  font-family: 'Impact', Arial, sans-serif;
+  font-family: "Impact", Arial, sans-serif;
+}
+
+.rating-stars {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem; /* control size of stars */
+  line-height: 1;
+  cursor: pointer;
+}
+
+.rating-stars .stars-empty,
+.rating-stars .stars-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+}
+
+.rating-stars .stars-empty {
+  color: #e4e4e7; /* gray outline / empty */
+}
+
+.rating-stars .stars-filled {
+  color: #facc15; /* yellow fill */
+  overflow: hidden; /* important: clip horizontally for partial stars */
+  width: 0; /* JS controls this (0–100%) */
+  pointer-events: none; /* mouse events handled by container */
+}
+
+.rating-display {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #4b5563;
 }
