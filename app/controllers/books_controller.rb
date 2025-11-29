@@ -13,12 +13,21 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+
+    initial_rating_value = params[:book][:initial_rating].presence
+
     if @book.save
+      if initial_rating_value
+        @book.ratings.create!(value: initial_rating_value)
+        @book.recalculate_average_rating!
+      end
+
       redirect_to @book, notice: "Book was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
+
 
   private
 
@@ -26,7 +35,6 @@ class BooksController < ApplicationController
     params.require(:book).permit(
       :title,
       :author,
-      :rating,
       :review,
       :cover_image,
       :description,
