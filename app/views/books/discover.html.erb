@@ -2,10 +2,20 @@
 <div class="main-container min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
   <div class="container max-w-6xl mx-auto px-8 py-10">
     <section class="max-w-5xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
-      <h1 class="text-4xl text-center mb-8" style="font-family: 'Playfair Display', serif; color: #403c2b;">
+      <h1 class="text-4xl text-center mb-6" style="font-family: 'Playfair Display', serif; color: #403c2b;">
         Discover Books
       </h1>
+      <!--  Search Bar -->
+      <%= form_with url: discover_path, method: :get, local: true, class: "mb-8 flex flex-col sm:flex-row gap-3" do %>
+        <%= text_field_tag :query,
+                           @query,
+                           placeholder: "Search by title...",
+                           class: "flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#78793f]" %>
+        <%= submit_tag "Search",
+                       class: "px-6 py-2 bg-[#403c2b] text-white rounded hover:bg-[#78793f] cursor-pointer" %>
+      <% end %>
       <% if @books.any? %>
+        <!--  Results Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           <% @books.each do |book| %>
             <a href="<%= book_path(book) %>"
@@ -25,9 +35,27 @@
           <% end %>
         </div>
       <% else %>
-        <p class="text-center text-gray-500 mt-8">
-          No books available yet. Add a book to start discovering!
-        </p>
+        <!--  No Results -->
+        <% if @query.present? %>
+          <p class="text-center text-gray-600 mt-6">
+            No books found with the title
+            <span class="font-semibold"><%= @query %></span>.
+          </p>
+          <div class="mt-6 flex justify-center">
+            <%= link_to "Add this book to GooderReads",
+                        new_book_path,
+                        class: "px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" %>
+          </div>
+        <% else %>
+          <p class="text-center text-gray-600 mt-6">
+            No books available yet. Add a book to start discovering!
+          </p>
+          <div class="mt-6 flex justify-center">
+            <%= link_to "Add Book",
+                        new_book_path,
+                        class: "px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" %>
+          </div>
+        <% end %>
       <% end %>
       <div class="mt-8 text-center">
         <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>

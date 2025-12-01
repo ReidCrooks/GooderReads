@@ -32,7 +32,14 @@ class BooksController < ApplicationController
 
   # Discover action to show all books
   def discover
-    @books = Book.all.order(created_at: :desc)
+    @query = params[:query]
+
+    if @query.present?
+      # SQLite: LIKE is case-insensitive by default
+      @books = Book.where("title LIKE ?", "%#{@query}%").order(created_at: :desc)
+    else
+      @books = Book.all.order(created_at: :desc)
+    end
   end
 
 
