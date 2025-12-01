@@ -126,7 +126,7 @@ if Rails.env.development? || Rails.env.test?
       title: "The Catcher in the Rye",
       author: "J.D Salinger",
       genre_names: [ "Classic", "Coming-of-age" ],
-      filename: "The_Catcher_in_the_Rye.jpg" 
+      filename: "The_Catcher_in_the_Rye.jpg"
     },
      {
       title: "The Adventures of Huckleberry Finn",
