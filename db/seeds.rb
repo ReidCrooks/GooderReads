@@ -51,6 +51,8 @@ if Rails.env.development? || Rails.env.test?
     "Philosophical Fiction",
 
   ]
+  user= User.first || User.create!(email: "admin@example.com", password: "password")
+  
 
   genres = genre_names.map do |name|
     Genre.find_or_create_by!(name: name)
@@ -66,7 +68,7 @@ if Rails.env.development? || Rails.env.test?
       title: "To Kill a Mockingbird",
       author: "Harper Lee",
       genre_names: [ "Fiction" ],
-      filename: "to_kill_a_mockingbird.png"
+      filename: "to_kill_a_mockingbird.jpg"
     },
     {
       title: "1984",
@@ -126,7 +128,7 @@ if Rails.env.development? || Rails.env.test?
       title: "The Adventures of Huckleberry Finn",
       author: "Mark Twain",
       genre_names: ["Classic", "Adventure"],
-      filename: "The_Adventures_of_Hucklebery_Finn.jpg",
+      filename: "The_Adventures_of_Huckleberry_Finn.jpg",
     },
      {
       title: "The Adventures of Tom Sawyer",
@@ -171,10 +173,10 @@ if Rails.env.development? || Rails.env.test?
       filename: "Crime_and_Punishment.jpg"
     },
      {
-      title: "The Brothers Karamzov",
+      title: "The Brothers Karamazov",
       author: "Fyodor Dostoevsky",
       genre_names: ["Classic", "Philosophical Fiction"],
-      filename: "The_Brothers_Karamzov.jpg"
+      filename: "The_Brothers_Karamazov.jpg"
     },
      {
       title: "War and Peace",
@@ -192,7 +194,7 @@ if Rails.env.development? || Rails.env.test?
       title: "The Grapes of Wrath",
       author: "John Steinbeck",
       genre_names: ["Classic", "Historical Fiction"],
-      filename: "TGW.jpg"
+      filename: "The_Grapes_of_Wrath.jpg"
     },
      {
       title: "East of Eden",
@@ -331,7 +333,7 @@ if Rails.env.development? || Rails.env.test?
       title: "Slaughterhouse-Five",
       author: "Kurt Vonnegut",
       genre_names: ["Science Fiction","Satire", "War Fiction"],
-      filename: "Slaughterhouse-five.jpg"
+      filename: "Slaughterhouse_five.jpg"
     },
     {
       title: "Heart of Darkness",
@@ -509,9 +511,10 @@ if Rails.env.development? || Rails.env.test?
     book = Book.find_or_create_by!(
       title: attrs[:title],
       author: attrs[:author],
-      genre: attrs[:genre_names]
+      genre: attrs[:genre_names],
+      user: user
     ) do |b|
-      b.rating = rand(1..5)
+      b.average_rating = rand(1..5)
       b.review = "There is not a review for this book, feel free to add one!"
     end
 
