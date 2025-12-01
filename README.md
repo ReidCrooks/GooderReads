@@ -10,11 +10,11 @@ Core feature of functioning Book database
 
 ### Supplemental Features
 
-"Add a book" feature to add books to the database
-"Discover" tab with all books listed and searching functionality
-"Review" feature to add a review to a book
-"Star Feature" to rate a book with half or quarter stars (out of five)
-"Recommended Reads" section with alternating suggested books by genre
+- "Add a book" feature to add books to the database
+- "Discover" tab with all books listed and searching functionality
+- "Review" feature to add a review to a book
+- "Star Feature" to rate a book with half or quarter stars (out of five)
+- "Recommended Reads" section with alternating suggested books by genre
 
 ## Setup
 
