@@ -1,0 +1,37 @@
+<!-- app/views/books/discover.html.erb -->
+<div class="main-container min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
+  <div class="container max-w-6xl mx-auto px-8 py-10">
+    <section class="max-w-5xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
+      <h1 class="text-4xl text-center mb-8" style="font-family: 'Playfair Display', serif; color: #403c2b;">
+        Discover Books
+      </h1>
+      <% if @books.any? %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <% @books.each do |book| %>
+            <a href="<%= book_path(book) %>"
+               class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
+              <% if book.cover_image.attached? %>
+                <%= image_tag book.cover_image,
+                    alt: book.title,
+                    class: "w-full h-60 object-cover rounded" %>
+              <% else %>
+                <%= image_tag "placeholder.jpg",
+                    alt: "No cover available",
+                    class: "w-full h-60 object-cover rounded" %>
+              <% end %>
+              <h2 class="mt-2 text-lg font-semibold text-[#403c2b]"><%= book.title %></h2>
+              <p class="text-sm text-gray-500 italic"><%= book.author %></p>
+            </a>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-center text-gray-500 mt-8">
+          No books available yet. Add a book to start discovering!
+        </p>
+      <% end %>
+      <div class="mt-8 text-center">
+        <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
+      </div>
+    </section>
+  </div>
+</div>

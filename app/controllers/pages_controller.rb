@@ -5,6 +5,9 @@ class PagesController < ApplicationController
                     .order(created_at: :desc)
                     .first || Book.first
 
+
+    @books = Book.all.order(created_at: :desc)
+
     # Pick up to 5 random genres that actually have books
     genres_with_books = Genre.joins(:books).distinct
     random_genres = genres_with_books.sample(5)

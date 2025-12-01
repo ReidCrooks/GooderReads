@@ -30,6 +30,11 @@ class BooksController < ApplicationController
     end
   end
 
+  # Discover action to show all books
+  def discover
+    @books = Book.all.order(created_at: :desc)
+  end
+
 
   private
 

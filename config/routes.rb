@@ -32,4 +32,7 @@ Rails.application.routes.draw do
 
   # Defines user read books route
   get "my_reads", to: "users#my_reads", as: "my_reads"
+
+  # Defines discover books route
+  get "discover", to: "books#discover", as: :discover
 end
