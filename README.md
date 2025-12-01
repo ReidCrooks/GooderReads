@@ -15,6 +15,7 @@ Core feature of functioning Book database
 - "Review" feature to add a review to a book
 - "Star Feature" to rate a book with half or quarter stars (out of five)
 - "Recommended Reads" section with alternating suggested books by genre
+- User account functionality to create an account to rate, add, review, and add books to "My Reads"
 
 ## Setup
 
