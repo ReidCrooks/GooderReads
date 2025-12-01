@@ -22,25 +22,6 @@
       <%= f.label :author, class: "block font-semibold mb-1" %>
       <%= f.text_field :author, class: "w-full border rounded px-3 py-2" %>
     </div>
-    <!-- Rating Field with Star UI -->
-    <div class="mb-4">
-      <%= f.label :initial_rating, "Rating", class: "block font-semibold mb-1" %>
-      <!-- Hidden field that actually gets submitted -->
-      <%= f.hidden_field :initial_rating, id: "rating-value", value: 0 %>
-      <!-- Star UI -->
-      <div id="star-rating" class="flex gap-3 cursor-pointer select-none">
-        <% 5.times do |i| %>
-          <span class="star text-4xl" data-star="<%= i + 1 %>">★</span>
-        <% end %>
-      </div>
-      <!-- Live rating preview -->
-      <p id="rating-preview" class="mt-2 text-sm font-semibold text-gray-700">
-        (0.00 / 5)
-      </p>
-      <p class="text-xs text-gray-500 mt-1">
-        Click on the stars to set a rating (supports quarter stars).
-      </p>
-    </div>
     <div class="mb-4">
       <%= f.label :genre_ids, "Genres", class: "block font-semibold mb-1" %>
       <%= f.collection_select :genre_ids,
@@ -55,10 +36,6 @@
       </p>
     </div>
     <div class="mb-4">
-      <%= f.label :review, class: "block font-semibold mb-1" %>
-      <%= f.text_area :review, rows: 4, class: "w-full border rounded px-3 py-2" %>
-    </div>
-    <div class="mb-4">
       <%= f.label :description, class: "block font-semibold mb-1" %>
       <%= f.text_area :description, rows: 5, class: "w-full border rounded px-3 py-2" %>
     </div>
@@ -70,79 +47,4 @@
       <%= f.submit "Create Book", class: "px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700" %>
     </div>
   <% end %>
-  <!-- Star Rating JavaScript -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const container = document.getElementById("star-rating");
-      if (!container) return;
-
-      const stars = Array.from(container.querySelectorAll(".star"));
-      const input = document.getElementById("rating-value");
-      const preview = document.getElementById("rating-preview");
-      const step = 0.25; // quarter-star steps
-
-      function setDisplay(rating) {
-        stars.forEach((star, index) => {
-          const starIndex = index + 1;
-
-          if (rating >= starIndex) {
-            // Full star
-            star.style.opacity = 1;
-          } else if (rating > starIndex - 1 && rating < starIndex) {
-            // Partial star (using fade as your current UI supports)
-            const fraction = rating - (starIndex - 1);
-            star.style.opacity = 0.3 + 0.7 * fraction;
-          } else {
-            // Empty star
-            star.style.opacity = 0.2;
-          }
-        });
-
-        // Update preview text
-        if (preview) preview.textContent = `(${rating.toFixed(2)} / 5)`;
-      }
-
-      function setRatingFromEvent(event, starEl) {
-        const rect = starEl.getBoundingClientRect();
-        const relativeX = event.clientX - rect.left;
-        const fraction = Math.min(Math.max(relativeX / rect.width, 0), 1);
-
-        // Snap fraction to quarters
-        let quarter;
-        if (fraction < 0.125) quarter = 0.0;
-        else if (fraction < 0.375) quarter = 0.25;
-        else if (fraction < 0.625) quarter = 0.5;
-        else if (fraction < 0.875) quarter = 0.75;
-        else quarter = 1.0;
-
-        const base = parseInt(starEl.dataset.star, 10) - 1;
-        const rating = base + quarter;
-
-        const clamped = Math.round(rating / step) * step;
-
-        input.value = clamped.toFixed(2);
-        setDisplay(clamped);
-
-        // Update preview text
-        if (preview) preview.textContent = `(${clamped.toFixed(2)} / 5)`;
-      }
-
-      // Hover effects (without clicking)
-      container.addEventListener("mousemove", function (e) {
-        if (e.target.classList.contains("star") && e.buttons === 0) {
-          setRatingFromEvent(e, e.target);
-        }
-      });
-
-      // Click selects rating
-      container.addEventListener("click", function (e) {
-        if (e.target.classList.contains("star")) {
-          setRatingFromEvent(e, e.target);
-        }
-      });
-
-      // Initial display (0)
-      setDisplay(parseFloat(input.value || "0"));
-    });
-  </script>
 </section>
