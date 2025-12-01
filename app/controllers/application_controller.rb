@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def profile
-    #Fetch the users information
+    # Fetch the users information
     @user = current_user
   end
 
   def my_reads
-    #Fetches books user has read
+    # Fetches books user has read
     @user = current_user
     @books = @user.books.where(read: true)
   end

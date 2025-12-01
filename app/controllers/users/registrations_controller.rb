@@ -69,9 +69,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Permit the name parameter during registration and account update
   def configure_permitted_parameters
     # Allow name, email, and password for registration
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
 
     # Allow name, email, and password for account update
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name ])
   end
 end

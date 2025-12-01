@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
 
-  #Devise routes for users
+  # Devise routes for users
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: "users/registrations"
   }
 
   root "pages#home"
@@ -22,10 +22,9 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  #Defines user profile route
-  get 'profile', to: 'users#show', as: 'profile'
+  # Defines user profile route
+  get "profile", to: "users#show", as: "profile"
 
-  #Defines user read books route
-  get 'my_reads', to: 'users#my_reads', as: 'my_reads'
-
+  # Defines user read books route
+  get "my_reads", to: "users#my_reads", as: "my_reads"
 end
