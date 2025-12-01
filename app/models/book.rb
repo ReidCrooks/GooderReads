@@ -10,6 +10,7 @@ class Book < ApplicationRecord
     belongs_to :user # , optional: true
 
     has_many :ratings, dependent: :destroy
+    has_many :reviews, dependent: :destroy
 
     # associate books with readings join table
     has_many :readings, dependent: :destroy
