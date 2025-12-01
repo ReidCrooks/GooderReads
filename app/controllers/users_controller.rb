@@ -7,6 +7,6 @@ class UsersController < ApplicationController
 
   def my_reads
     @user = current_user
-    @books = current_user.books # Get books for logged in user
+    @books = current_user.my_books # Get books for logged in user
   end
 end

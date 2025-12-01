@@ -11,6 +11,10 @@ class Book < ApplicationRecord
 
     has_many :ratings, dependent: :destroy
 
+    # associate books with readings join table
+    has_many :readings, dependent: :destroy
+    has_many :readers, through: :readings, source: :user
+
     def recalculate_average_rating!
         new_avg = ratings.average(:value) || 0.0 # calculate average or default to 0.0
         update!(average_rating: new_avg)

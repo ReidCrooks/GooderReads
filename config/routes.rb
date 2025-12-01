@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+    # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+
+    #route for adding books to my reads
+  resources :books do
+    resources :readings, only: [:create, :destroy]
+  end
 
   # Devise routes for users
   devise_for :users, controllers: {

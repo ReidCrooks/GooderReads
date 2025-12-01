@@ -29,6 +29,24 @@
     <h2 class="text-xl font-semibold mb-2">Reviews</h2>
     <p class="text-gray-800"><%= @book.review %></p>
   </div>
+  <% if user_signed_in? %>
+    <% reading = current_user.readings.find_by(book_id: @book.id) %>
+    <% if reading %>
+      <%= button_to "Remove from My Reads",
+        book_reading_path(@book, reading),
+        method: :delete,
+        class: "mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full text-center" %>
+    <% else %>
+      <%= button_to "Add to My Reads",
+        book_readings_path(@book),
+        method: :post,
+        class: "mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-full text-center" %>
+    <% end %>
+  <% else %>
+    <p class="mt-4 text-sm text-gray-600">
+      <%= link_to "Log in", new_user_session_path, class: "underline" %> to save this book to your My Reads.
+    </p>
+  <% end %>
   <div class="mt-6">
     <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
   </div>

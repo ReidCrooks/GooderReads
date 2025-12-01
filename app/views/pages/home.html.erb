@@ -66,9 +66,13 @@
       <!-- Books Header -->
       <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
         <div class="flex justify-between items-center">
-          <%= link_to "Add Book",
+          <div>
+            <h2>Want to add a Book?
+              <%= link_to "Add Book",
                 new_book_path,
                 class: "px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700" %>
+            </h2>
+          </div>
         </div>
       </section>
       <!-- Recommended Reads By Genre -->
