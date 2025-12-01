@@ -4,6 +4,9 @@
     <section class="max-w-5xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
       <h1 class="text-4xl text-center mb-6" style="font-family: 'Playfair Display', serif; color: #403c2b;">
         Discover Books
+        <div class="mt-8 text-center">
+          <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
+        </div>
       </h1>
       <!--  Search Bar -->
       <%= form_with url: discover_path, method: :get, local: true, class: "mb-8 flex flex-col sm:flex-row gap-3" do %>
@@ -57,9 +60,6 @@
           </div>
         <% end %>
       <% end %>
-      <div class="mt-8 text-center">
-        <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
-      </div>
     </section>
   </div>
 </div>
