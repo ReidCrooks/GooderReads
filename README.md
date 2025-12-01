@@ -30,8 +30,8 @@ Core feature of functioning Book database
 
 ## Authors
 
-Brayden Robertson
-Chloe Dierdorff
-Jaxon Svec
-Reid Crooks
-Calvin Thompson III
+- Brayden Robertson
+- Chloe Dierdorff
+- Jaxon Svec
+- Reid Crooks
+- Calvin Thompson III
