@@ -66,11 +66,42 @@
   </div>
 
   <div class = "mb-4">
-  <%= f.label :rating, "Rating (1-5)", class: "block font-medium mb-1" %>
-  <%= f.number_field :rating,
-      in: 1..5,
-      class: "border rounded w-24 p-2" %>
+  <%= f.label :rating, "Rating (0.25-5, quarter stars)", class: "block font-medium mb-1"%>
+   <%= f.hidden_field :rating,
+          id: "review_rating",
+          value: 0.25 %>
+
+<!--5 stars with 20 segments-->
+<div id = "rating-stars" class = "relative inline-block mt-1 select-none">
+
+   <div class="text-4xl text-gray-300 pointer-events-none">
+  ★★★★★
 </div>
+
+<!--filler for stars-->
+<div id = "rating-stars-fill"
+    class = "absolute inset-0 overflow-hidden pointer-events-none"
+    style = "width: 5%;">
+    <div class = "text-4xl text-yellow-400">
+    ★★★★★
+    </div>
+  </div>
+
+  <!--segments for stars-->
+  <div id = "rating-stars-hitbox" class = "absolute inset-0 flex">
+  <% (1..20).each do |i| %>
+    <div class = "flex-1 rating-segment cursor-pointer"
+      data-value = "<%= i * 0.25 %>">
+      </div>
+      <%end%>
+    </div>
+  </div>
+
+  <!--value display-->
+  <span id = "rating-value" class = "text-sm text-gray-600 mt-1 inline-block">
+    0.25 / 5
+    </span>
+  </div>
 
 <%= f.submit "Post",
   class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" %>
@@ -104,3 +135,48 @@
 <% else %>
   <p class="text-gray-500">No reviews yet — be the first!</p>
 <% end %>
+</section>
+
+<script>
+function initReviewStars() {
+  const starContainer = document.getElementById("rating-stars");
+
+  if (!starContainer) return;
+  const segments = Array.from(starContainer.querySelectorAll(".rating-segment"));
+  const hiddenInput = document.getElementById("review_rating");
+  const valueLabel = document.getElementById("rating-value");
+  const fill = document.getElementById("rating-stars-fill");
+  
+  let currentRating = parseFloat(hiddenInput.value || "0.25");
+
+  function paintStars(rating) {
+      if (isNaN(rating)) return;
+      rating = Math.max(0.25, Math.min(5, rating));
+
+      const percent = (rating / 5) * 100;
+      fill.style.width = percent + "%";
+
+      valueLabel.textContent = rating.toFixed(2).replace(/\.00$/, "") + " / 5";
+    }
+
+  paintStars(currentRating);
+    segments.forEach(segment => {
+      segment.addEventListener("mouseenter", () => {
+        const hoverValue = parseFloat(segment.dataset.value);
+        paintStars(hoverValue);
+      });
+
+      segment.addEventListener("click", () => {
+        currentRating = parseFloat(segment.dataset.value);
+        hiddenInput.value = currentRating;
+        paintStars(currentRating);
+      });
+  });
+
+  starContainer.addEventListener("mouseleave", () => {
+    paintStars(currentRating);
+  });
+}
+  document.addEventListener("DOMContentLoaded", initReviewStars);
+  document.addEventListener("turbo:load", initReviewStars);
+</script>
