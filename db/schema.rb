@@ -17,8 +17,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index [" blob_id" ], name: "index_active_storage_attachments_on_blob_id"
+    t.index [ "record_type", "record_id", "name", "blob_id" ], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -30,13 +30,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.bigint "byte_size", null: false
     t.string "checksum"
     t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+    t.index [ "key" ], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index [ "blob_id", "variation_digest" ], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "book_genres", force: :cascade do |t|
@@ -44,8 +44,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.integer "genre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_book_genres_on_book_id"
-    t.index ["genre_id"], name: "index_book_genres_on_genre_id"
+    t.index [ "book_id" ], name: "index_book_genres_on_book_id"
+    t.index [ "genre_id" ], name: "index_book_genres_on_genre_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.string "cover_file"
     t.text "description"
     t.integer "user_id"
-    t.index ["user_id"], name: "index_books_on_user_id"
+    t.index [ "user_id"] , name: "index_books_on_user_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -75,8 +75,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.decimal "value", precision: 3, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_ratings_on_book_id"
-    t.index ["user_id"], name: "index_ratings_on_user_id"
+    t.index [ "book_id" ], name: "index_ratings_on_book_id"
+    t.index [ "user_id" ], name: "index_ratings_on_user_id"
   end
 
   create_table "readings", force: :cascade do |t|
@@ -84,8 +84,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.integer "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_readings_on_book_id"
-    t.index ["user_id"], name: "index_readings_on_user_id"
+    t.index [ "book_id" ], name: "index_readings_on_book_id"
+    t.index [ "user_id" ], name: "index_readings_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -95,8 +95,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_reviews_on_book_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index [ "book_id" ], name: "index_reviews_on_book_id"
+    t.index [ "user_id" ], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,8 +108,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_02_020130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index [ "email" ], name: "index_users_on_email", unique: true
+    t.index [ "reset_password_token" ], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
