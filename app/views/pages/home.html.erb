@@ -81,29 +81,27 @@
           Recommended Reads By Genre
         </h2>
         <% if @recommended_books.present? %>
-          <% @recommended_books.each do |genre, books_in_genre| %>
-            <h3 class="text-2xl font-semibold mb-4 text-[#403c2b]">
-              <%= genre.name %>
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              <% books_in_genre.each do |book| %>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <% @recommended_books.each do |genre, book| %>
+              <div class="flex flex-col items-center text-center">
+                <h3 class="text-xl font-semibold mb-4 text-[#403c2b]"><%= genre.name %></h3>
                 <a href="<%= book_path(book) %>"
-                   class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
+             class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 w-full">
                   <% if book.cover_image.attached? %>
                     <%= image_tag book.cover_image,
-                        alt: book.title,
-                        class: "w-full h-60 object-cover rounded" %>
+                  alt: book.title,
+                  class: "w-full h-60 object-cover rounded" %>
                   <% else %>
                     <%= image_tag "placeholder.jpg",
-                        alt: "No cover available",
-                        class: "w-full h-60 object-cover rounded" %>
+                  alt: "No cover available",
+                  class: "w-full h-60 object-cover rounded" %>
                   <% end %>
                   <h4 class="mt-2 text-lg font-semibold text-[#403c2b]"><%= book.title %></h4>
                   <p class="text-sm text-gray-500 italic"><%= book.author %></p>
                 </a>
-              <% end %>
-            </div>
-          <% end %>
+              </div>
+            <% end %>
+          </div>
         <% else %>
           <p class="text-center text-gray-500 mt-8">No recommended books available yet.</p>
         <% end %>

@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user! # Ensure user is authenticated to view their books
+  # Only require login for creating books
+  before_action :authenticate_user!, only: [ :new, :create ]
 
   def index
     @books = Book.all
@@ -10,11 +11,11 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
+    @book = current_user.books.build
   end
 
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.build(book_params)
 
     initial_rating_value = params[:book][:initial_rating].presence
 
@@ -30,18 +31,15 @@ class BooksController < ApplicationController
     end
   end
 
-  # Discover action to show all books
   def discover
     @query = params[:query]
 
     if @query.present?
-      # SQLite: LIKE is case-insensitive by default
       @books = Book.where("title LIKE ?", "%#{@query}%").order(created_at: :desc)
     else
       @books = Book.all.order(created_at: :desc)
     end
   end
-
 
   private
 
@@ -52,7 +50,7 @@ class BooksController < ApplicationController
       :review,
       :cover_image,
       :description,
-      genre_ids: [] # allow multiple genre id's
+      genre_ids: []
     )
   end
 end

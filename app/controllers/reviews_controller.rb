@@ -19,13 +19,13 @@ class ReviewsController < ApplicationController
     def destroy
         @book = Book.find(params[:book_id])
         @review = @book.reviews.find(params[:id])
-        
+
         if @review.user == current_user
             @review.destroy
             redirect_to @book, notice: "Review deleted."
-            else
+        else
       redirect_to @book, alert: "You may only delete your own review."
-    end
+        end
 end
 
 
@@ -33,6 +33,5 @@ end
 
     def review_params
         params.require(:review).permit(:body, :rating)
-
     end
 end
