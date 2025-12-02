@@ -118,10 +118,16 @@
       <% @book.reviews.order(created_at: :desc).each do |review| %>
         <div class="p-3 bg-gray-50 rounded shadow-sm flex justify-between items-start gap-4">
           <div>
+          <p class = "text-sm text-gray-500">
+          <strong><%= review.user.name.presence || review.user.email%></strong>
+          <%= time_ago_in_words(review.created_at) %> ago
+          </p>
             <div class="font-semibold text-gray-800">
               <%= review.rating %>/5
             </div>
-            <p class="text-gray-700 mt-1"><%= review.body %></p>
+            <p class="text-gray-700 mt-1">
+            <%= review.body %>
+            </p>
           </div>
           <% if review.user == current_user %>
             <%= button_to "Delete Review",
