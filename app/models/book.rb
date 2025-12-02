@@ -17,7 +17,21 @@ class Book < ApplicationRecord
     has_many :readers, through: :readings, source: :user
 
     def recalculate_average_rating!
-        new_avg = ratings.average(:value) || 0.0 # calculate average or default to 0.0
+        values = []
+
+        # ratings from the ratings table (e.g. initial rating from Add Book)
+        values.concat ratings.pluck(:value)
+
+        # ratings from reviews
+        values.concat reviews.pluck(:rating)
+
+        new_avg =
+        if values.any?
+            values.sum.to_f / values.size
+        else
+            0.0
+        end
+
         update!(average_rating: new_avg)
     end
 end
