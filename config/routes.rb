@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   root "pages#home"
   get "home", to: "pages#home" # redirects /home to root path
   resources :books do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews, only: [ :create, :destroy ]
   end
 
   # Defines the root path route ("/")
