@@ -26,8 +26,8 @@
     <!-- Dev Selected Book -->
     <% if @dev_book.present? %>
       <section id="dev-book" 
-               class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1"
-               style="font-family: 'Playfair', serif; color: #403c2b;">
+               class="max-w-4xl mx-auto p-8 mb-12 bg-[#B6AA82] shadow-md border border-[#DAD3BD] transition-transform transform hover:-translate-y-1"
+               style="font-family: 'Playfair', serif; color: #f7f4e9;">
         <div class="flex flex-col md:flex-row gap-6">
           <% if @dev_book&.cover_image&.attached? %>
             <%= image_tag @dev_book.cover_image,
@@ -40,14 +40,14 @@
           <% end %>
           <div class="flex flex-col justify-center">
             <h2 class="text-3xl font-semibold mb-2"><%= @dev_book.title %></h2>
-            <p class="italic mb-4 text-[#78793f]">by <%= @dev_book.author %></p>
+            <p class="italic mb-4 text-[#f7f4e9]">by <%= @dev_book.author %></p>
             <% if @dev_book.review.present? %>
               <p class="text-gray-700 leading-relaxed"><%= @dev_book.review %></p>
             <% else %>
               <p class="text-gray-500 italic">No review available for this book.</p>
             <% end %>
             <a href="<%= book_path(@dev_book) %>" 
-               class="mt-4 inline-block text-[#403c2b] hover:text-[#78793f] font-semibold transition-colors">
+               class="mt-4 inline-block text-[#f7f4e9] hover:text-[#403c2b] font-semibold transition-colors">
               View Book →
             </a>
           </div>
@@ -55,7 +55,7 @@
       </section>
     <% else %>
       <section id="dev-book-placeholder" 
-               class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 text-center text-[#403c2b]">
+               class="max-w-4xl mx-auto p-8 mb-12 bg-[#9D9167] rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 text-center text-[#f7f4e9]">
         <%= image_tag "placeholder.jpg", alt: "No book found", class: "w-48 h-72 object-cover rounded shadow mx-auto" %>
         <h2 class="text-xl font-semibold mt-4">No Featured Book Available</h2>
         <p class="text-gray-500">Add a book to get started!</p>
@@ -64,29 +64,27 @@
     <!-- Books Section -->
     <div id="books-section">
       <!-- Books Header -->
-      <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
-        <div class="flex justify-between items-center">
-          <div>
-            <h2>Want to add a Book?
-              <%= link_to "Add Book",
-                new_book_path,
-                class: "px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700" %>
-            </h2>
-          </div>
-        </div>
-      </section>
+      <section class="max-w-4xl mx-auto my-12 text-center border-t border-[#DAD3BD] pt-8">
+        <h2 class = "text-lg text-[#403C2B] mb-4">
+        Want to add a book?
+        </h2>
+          <%= link_to "Add Book",
+        new_book_path,
+        class: "px-6 py-2 bg-[#9D9167] text-white font-semibold hover:bg-[#877d56] shadow transition"
+  %>
+</section>
       <!-- Recommended Reads By Genre -->
-      <section id="recommended" class="p-8 bg-white rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1">
-        <h2 class="text-4xl text-center text-[#403c2b] mb-10" style="font-family: 'Playfair Display', serif;">
+      <section id="recommended" class="p-8 bg-[#B6AA82] shadow-md border border-[#DAD3BD] transition-transform transform hover:-translate-y-1">
+        <h2 class="text-4xl text-center text-[#fffef3] mb-10" style="font-family: 'Playfair Display', serif;">
           Recommended Reads By Genre
         </h2>
         <% if @recommended_books.present? %>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <% @recommended_books.each do |genre, book| %>
               <div class="flex flex-col items-center text-center">
-                <h3 class="text-xl font-semibold mb-4 text-[#403c2b]"><%= genre.name %></h3>
+                <h3 class="text-xl font-semibold mb-4 text-[#fffef3]"><%= genre.name %></h3>
                 <a href="<%= book_path(book) %>"
-             class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 w-full">
+             class="block bg-[#fffef3] p-4 rounded-sm shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 w-full">
                   <% if book.cover_image.attached? %>
                     <%= image_tag book.cover_image,
                   alt: book.title,
@@ -96,7 +94,7 @@
                   alt: "No cover available",
                   class: "w-full h-60 object-cover rounded" %>
                   <% end %>
-                  <h4 class="mt-2 text-lg font-semibold text-[#403c2b]"><%= book.title %></h4>
+                  <h4 class="mt-2 text-lg font-semibold text-[#fffef3]"><%= book.title %></h4>
                   <p class="text-sm text-gray-500 italic"><%= book.author %></p>
                 </a>
               </div>
