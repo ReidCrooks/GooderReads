@@ -1,23 +1,23 @@
 <div class="main-container min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
   <div class="container max-w-6xl mx-auto px-8">
     <!-- Navigation Bar -->
-    <section id="home-taskbar" class="w-full bg-[#fff8e7] shadow-md rounded-b-lg">
-      <div class="max-w-6xl mx-auto flex justify-between items-center py-6 px-4">
+    <section id = "home-taskbar" class = "w-full border-[#442D1C]">
+      <div class = "max-w-6xl mx-auto flex justify-between items-center py-4 px-4">
         <!-- Left links -->
-        <nav class="flex gap-6 text-lg tracking-[0.25em] uppercase font-semibold">
-          <%= link_to "Discover", discover_path, class: "text-white navbar-link" %> <!-- Discover link -->
-          <%= link_to "Profile", profile_path, class: "text-white navbar-link" %> <!-- Profile link -->
+        <nav class = "flex gap-6 text-sm tracking-[0.25em] uppercase font-medium">
+          <%= link_to "Discover", discover_path, class: "text-[#442D1C] navbar-link hover:text-[#403c2b]" %> <!-- Discover link -->
+          <%= link_to "Profile", profile_path, class: "text-[#442D1C] navbar-link hover:text-[#403c2b]" %> <!-- Profile link -->
         </nav>
         <!-- Centered GooderReads -->
-        <a href="/" 
-           style="font-family: 'Playfair Display', serif;" 
-           class="text-4xl text-white text-center font-bold navbar-link">
+        <a href = "/" 
+           style = "font-family: 'Playfair Display', serif;" 
+           class = "text-3xl text-[#442D1C] text-center font-bold navbar-link">
           GooderReads
         </a>
         <!-- Right links -->
-        <nav class="flex gap-6 text-lg tracking-[0.25em] uppercase font-semibold">
-          <%= link_to "My Reads", my_reads_path, class: "text-white navbar-link" %> <!-- My Reads link -->
-          <%= link_to "Reviews", bookclub_path, class: "text-white navbar-link" %>
+        <nav class="flex gap-6 text-sm tracking-[0.25em] uppercase font-medium">
+          <%= link_to "My Reads", my_reads_path, class: "text-[#442D1C] navbar-link hover:text-[#403c2b]" %> <!-- My Reads link -->
+          <%= link_to "Reviews", bookclub_path, class: "text-[#442D1C] navbar-link hover:text-[#403c2b]" %>
         </nav>
       </div>
       <!-- Divider -->
