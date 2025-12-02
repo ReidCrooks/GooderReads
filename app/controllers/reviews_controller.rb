@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   layout "application"
 
   def book_club
-    #Fetch all reviews, newest first
+    # Fetch all reviews, newest first
     @reviews = Review.includes(:user, :book).order(created_at: :desc)
   end
 
