@@ -1,4 +1,4 @@
-<div class="main-container min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
+<div class="main-container flex-grow flex min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
   <div class="container max-w-6xl mx-auto px-8">
     <!-- Profile Card -->
     <section class="max-w-4xl mx-auto p-8 mb-12 bg-white rounded-xl shadow-2xl hover:shadow-2xl transition-all transform hover:-translate-y-1">
@@ -16,6 +16,12 @@
       </div>
       <div class="flex flex-col items-center gap-4">
         <%= link_to "Edit Profile", edit_user_registration_path, class: "bg-[#403c2b] text-white py-2 px-6 rounded-lg text-lg hover:bg-[#78793f] transition-colors" %>
+      </div>
+      <!-- Logout Button -->
+      <div class="flex justify-center mt-6">
+        <%= button_to destroy_user_session_path, method: :delete, class: "bg-red-600 text-white py-2 px-6 rounded-lg text-lg hover:bg-red-700 transition-colors" do %>
+          Log out
+        <% end %>
       </div>
       <div class="mt-6">
         <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="min-h-screen">
   <head>
     <title>GooderReads</title>
     <%= csrf_meta_tags %>
@@ -15,7 +15,7 @@
     <!-- js -->
     <%= javascript_importmap_tags %>
   </head>
-  <body class="bg-[#fffef3]">
+  <body class="bg-[#f7f4e9] min-h-screen font-sans">
     <%= render "layouts/alerts" %>
     <%= yield %>
   </body>

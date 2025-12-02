@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # route for adding books to my reads
   resources :books do
+    resources :reviews
     resources :readings, only: [ :create, :destroy ]
   end
 
@@ -34,6 +35,9 @@ Rails.application.routes.draw do
 
   # Defines user read books route
   get "my_reads", to: "users#my_reads", as: "my_reads"
+
+  # Defines BookClub route
+  get 'bookclub', to: 'reviews#book_club', as: "bookclub"
 
   # Defines discover books route
   get "discover", to: "books#discover", as: :discover
