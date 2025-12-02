@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  layout "application"
+  
   def home
     # Featured "dev" book: prefer one with a cover image, else fall back to first book
     @dev_book = Book.joins(:cover_image_attachment)

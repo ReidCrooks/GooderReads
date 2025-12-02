@@ -1,3 +1,141 @@
+<section class="max-w-2xl mx-auto p-8 bg-[#f7f4e9] rounded-lg shadow">
+  <!-- Book Cover -->
+  <% if @book.cover_image.attached? %>
+    <div class="my-4 flex justify-center">
+      <%= image_tag @book.cover_image,
+            class: "w-48 h-72 object-cover rounded shadow" %>
+    </div>
+  <% else %>
+    <div class="my-4 flex justify-center">
+      <%= image_tag "placeholder.jpg",
+            class: "w-48 h-72 object-cover rounded shadow" %>
+    </div>
+  <% end %>
+
+  <!-- Book Info -->
+  <h1 class="text-3xl font-bold mb-4"><%= @book.title %></h1>
+  <p class="mb-2 text-gray-700"><strong>Author:</strong> <%= @book.author %></p>
+  <p class="mb-2 text-gray-700"><strong>Rating:</strong> <%= @book.average_rating&.round(2) || 0 %>/5</p>
+
+  <% if @book.genres.any? %>
+    <p class="mb-2 text-gray-700">
+      <strong>Genres:</strong>
+      <%= @book.genres.map(&:name).join(", ") %>
+    </p>
+  <% end %>
+
+  <% if @book.description.present? %>
+    <div class="mt-4">
+      <h2 class="text-xl font-semibold mb-2">Description</h2>
+      <p class="text-gray-800"><%= @book.description %></p>
+    </div>
+  <% end %>
+
+  <!-- Add/remove from My Reads -->
+  <% if user_signed_in? %>
+    <% reading = current_user.readings.find_by(book_id: @book.id) %>
+
+    <% if reading %>
+      <%= button_to "Remove from My Reads",
+        book_reading_path(@book, reading),
+        method: :delete,
+        class: "mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full text-center" %>
+    <% else %>
+      <%= button_to "Add to My Reads",
+        book_readings_path(@book),
+        method: :post,
+        class: "mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-full text-center" %>
+    <% end %>
+  <% else %>
+    <p class="mt-4 text-sm text-gray-600">
+      <%= link_to "Log in", new_user_session_path, class: "underline" %>
+      to save this book to your My Reads.
+    </p>
+  <% end %>
+
+  <div class="mt-6">
+    <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
+  </div>
+</section>
+
+<section class="max-w-2xl mx-auto p-8 mt-8 bg-white rounded-lg shadow">
+  <h2 class="text-3xl font-semibold mb-6">Discussion</h2>
+
+  <!-- Review Form -->
+  <% if user_signed_in? %>
+    <%= form_with model: [@book, Review.new], local: true do |f| %>
+      <div class="mb-4">
+        <%= f.label :body, "Add a Review", class: "block font-medium mb-1" %>
+        <%= f.text_area :body, rows: 3, placeholder: "Share your thoughts...",
+                        class: "border rounded w-full p-2" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :rating, "Rating (1-5)", class: "block font-medium mb-1" %>
+        <%= f.number_field :rating, in: 1..5,
+                           class: "border rounded w-24 p-2" %>
+      </div>
+
+      <%= f.submit "Post",
+          class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" %>
+    <% end %>
+  <% else %>
+    <p class="text-sm text-gray-600">
+      <%= link_to "Log in", new_user_session_path, class: "underline" %> to post a review.
+    </p>
+  <% end %>
+
+  <hr class="my-6">
+
+  <!-- Review List -->
+  <% if @book.reviews.any? %>
+    <div class="space-y-4 max-h-72 overflow-y-auto pr-2">
+      <% @book.reviews.includes(:user).order(created_at: :desc).each do |review| %>
+        <div class="p-4 bg-gray-50 rounded shadow-sm">
+
+          <!-- Reviewer Name + Rating -->
+          <div class="flex-col items-center gap-4">
+            <div>
+              <p class="font-semibold text-gray-900">
+                <%= review.user.name.presence || review.user.email %>
+              </p>
+              <p class="text-gray-700"><strong><%= review.rating %>/5</strong></p>
+            </div>
+
+            <!-- Edit/Delete for Owner -->
+            <% if review.user == current_user %>
+              <div class="flex-col gap-2">
+                <%= link_to "Edit",
+                      edit_book_review_path(@book, review),
+                      class: "text-sm text-blue-600 hover:underline" %>
+
+                <%= button_to "Delete",
+                      book_review_path(@book, review),
+                      method: :delete,
+                      data: { confirm: "Delete this review?" },
+                      class: "text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded",
+                      form: { class: "inline-block" } %>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Review Body -->
+          <p class="mt-2 text-gray-800"><%= review.body %></p>
+
+          <small class="text-gray-500">
+            Posted <%= time_ago_in_words(review.created_at) %> ago
+          </small>
+
+        </div>
+      <% end %>
+    </div>
+
+  <% else %>
+    <p class="text-gray-500">No reviews yet — be the first!</p>
+  <% end %>
+</section>
+
+<!-- 
 <section class="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow">
   <% if @book.cover_image.attached? %>
     <div class="my-4 flex justify-center">
@@ -47,7 +185,8 @@
     <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
   </div>
 </section>
-<!--reviews-->
+
+reviews-->
 <section class = "max-w-2xl mx-auto p-8 bg-white rounded-lg shadow">
   <h2 class="text-3xl font-semibold mb-4">Reviews</h2>
   <!-- review form -->
@@ -55,6 +194,10 @@
     <div class = "mb-4">
       <%= f.label :body, "Add a review", class: "block font-medium mb-1" %>
       <%= f.text_area :body,
+ <%= form_with model: [@book, Review.new], local: true do |f| %>
+  <div class = "mb-4">
+    <%= f.label :body, "Add a review", class: "block font-medium mb-1" %>
+    <%= f.text_area :body,
       rows: 3,
       placeholder: "Share a review...",
       class: "border rounded w-full p-2" %>
@@ -64,34 +207,40 @@
       <%= f.hidden_field :rating,
           id: "review_rating",
           value: 0.25 %>
-      <!--5 stars with 20 segments-->
-      <div id = "rating-stars" class = "relative inline-block mt-1 select-none">
-        <div class="text-4xl text-gray-300 pointer-events-none">
-          ★★★★★
-        </div>
-        <!--filler for stars-->
-        <div id = "rating-stars-fill"
+
+<!--5 stars with 20 segments-->
+<div id = "rating-stars" class = "relative inline-block mt-1 select-none">
+
+   <div class="text-4xl text-gray-300 pointer-events-none">
+  ★★★★★
+</div>
+
+<!--filler for stars-->
+<div id = "rating-stars-fill"
     class = "absolute inset-0 overflow-hidden pointer-events-none"
     style = "width: 5%;">
-          <div class = "text-4xl text-yellow-400">
-            ★★★★★
-          </div>
-        </div>
-        <!--segments for stars-->
-        <div id = "rating-stars-hitbox" class = "absolute inset-0 flex">
-          <% (1..20).each do |i| %>
-            <div class = "flex-1 rating-segment cursor-pointer"
-      data-value = "<%= i * 0.25 %>">
-            </div>
-          <%end%>
-        </div>
-      </div>
-      <!--value display-->
-      <span id = "rating-value" class = "text-sm text-gray-600 mt-1 inline-block">
-        0.25 / 5
-      </span>
+    <div class = "text-4xl text-yellow-400">
+    ★★★★★
     </div>
-    <%= f.submit "Post",
+  </div>
+
+  <!--segments for stars-->
+  <div id = "rating-stars-hitbox" class = "absolute inset-0 flex">
+  <% (1..20).each do |i| %>
+    <div class = "flex-1 rating-segment cursor-pointer"
+      data-value = "<%= i * 0.25 %>">
+      </div>
+      <%end%>
+    </div>
+  </div>
+
+  <!--value display-->
+  <span id = "rating-value" class = "text-sm text-gray-600 mt-1 inline-block">
+    0.25 / 5
+    </span>
+  </div>
+
+<%= f.submit "Post",
   class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" %>
   <%end%>
   <hr class = "my-6">
@@ -162,3 +311,4 @@
     document.addEventListener("DOMContentLoaded", initReviewStars);
     document.addEventListener("turbo:load", initReviewStars);
 </script>
+-->

@@ -1,0 +1,51 @@
+<!-- Main container for the Book Club page -->
+<div class="main-container flex flex-grow flex-col min-h-screen w-full bg-[#f7f4e9]" style="font-family: 'Playfair', serif; background-color: #fffef3">
+  <div class="container max-w-6xl mx-auto px-8 py-10 flex-grow">
+    <!-- Page title -->
+    <h1 class="text-4xl font-bold mb-8 text-center text-[#403c2b]">
+      Book Club Reviews
+    </h1>
+
+    <!-- Check if there are any reviews -->
+    <% if @reviews.any? %>
+      <div class="space-y-6">
+        <% @reviews.each do |review| %>
+          <!-- Individual review card -->
+          <div class="bg-white rounded-xl shadow p-10 hover:shadow-lg transition transform hover:-translate-y-1">
+            <!-- Top section: Reviewer info and timestamp -->
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <p class="font-semibold text-[#403c2b]">
+                  <%= review.user.name.presence || review.user.email %> 
+                  on 
+                  <%= link_to review.book.title, book_path(review.book), class: "underline text-blue-600" %>
+                </p>
+
+                <!-- Review rating -->
+                <p class="text-gray-700">
+                  <strong>Rating:</strong> <%= review.rating %>/5
+                </p>
+              </div>
+              
+              <small class="text-gray-500">
+                <%= time_ago_in_words(review.created_at) %> ago
+              </small>
+            </div>
+
+            <p class="text-gray-800"><%= review.body %></p>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- Message shown if no reviews exist -->
+      <p class="text-center text-gray-500">
+        No reviews yet. Be the first to add one!
+      </p>
+    <% end %>
+  </div>
+
+  <!-- Back to Home Button -->
+  <div class="mt-auto mb-8 text-center">
+    <%= link_to "Back to Home", home_path, class: "text-blue-600 hover:underline" %>
+  </div>
+</div>

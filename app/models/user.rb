@@ -3,6 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :readings, dependent: :destroy
-  has_many :my_books, through: :readings, source: :book   # books in My Reads
-  has_many :books, dependent: :destroy                    # books this user created
+  has_many :readers, through: :readings, source: :user
+  has_many :my_books, through: :readings, source: :book
+  has_many :reviews, dependent: :destroy
+  has_many :books, dependent: :destroy
+
 end

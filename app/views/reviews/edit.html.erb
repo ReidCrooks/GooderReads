@@ -1,0 +1,19 @@
+<div class="max-w-3xl mx-auto mt-10 bg-white shadow p-8 rounded-xl"
+     style="font-family: 'Playfair Display', serif;">
+  <h1 class="text-3xl font-bold mb-6 text-[#403c2b]">Edit Your Review</h1>
+  <%= form_with(model: [@book, @review], local: true) do |f| %>
+    <%= f.label :body, "Review", class: "block font-semibold mb-2" %>
+    <%= f.text_area :body, rows: 4,
+        class: "w-full border border-gray-300 rounded p-3 mb-4" %>
+    <%= f.label :rating, "Rating", class: "block font-semibold mb-2" %>
+    <%= f.number_field :rating, min: 1, max: 5,
+        class: "w-24 border border-gray-300 rounded p-2 mb-6" %>
+    <div class="flex-col gap-10">
+      <%= f.submit "Save Changes",
+          class: "mb-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" %>
+      <%= link_to "Cancel",
+          @book,
+          class: "px-6 py-2 bg-gray-300 text-black rounded hover:bg-gray-400" %>
+    </div>
+  <% end %>
+</div>
