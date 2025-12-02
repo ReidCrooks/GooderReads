@@ -11,13 +11,13 @@ class PagesController < ApplicationController
 
     @books = Book.all.order(created_at: :desc)
 
-    # Pick up to 5 random genres that actually have books
-    genres_with_books = Genre.joins(:books).distinct
-    random_genres = genres_with_books.sample(5)
+    # Pick 4 random genres that actually have books
+    genres = Genre.joins(:books).distinct.sample(4)
 
-    # Build a hash: { Genre => [books...] }
-    @recommended_books = random_genres.index_with do |genre|
-      genre.books.distinct.sample(3)   # up to 3 books per genre
+    @recommended_books = genres.map do |genre|
+      # select ONE random book from this genre
+      book = genre.books.sample
+      [ genre, book ]
     end
   end
 end

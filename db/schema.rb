@@ -90,7 +90,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_202706) do
 
   create_table "reviews", force: :cascade do |t|
     t.text "body"
+<<<<<<< HEAD
     t.integer "rating"
+=======
+    t.decimal "rating", precision: 3, scale: 2
+>>>>>>> 60c6f3d1fb27f49c9f3edaf8e4fd28ca895912e0
     t.integer "book_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false

@@ -25,7 +25,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-
   def edit
 
   end
